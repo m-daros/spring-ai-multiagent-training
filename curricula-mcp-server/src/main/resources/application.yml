@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: curricula-mcp-server
+
+
+  ai:
+    mcp:
+      server:
+        name: account-mcp-server
+        version: 1.0.0
+        type: SYNC
+        stdio:
+          enabled: false
+#        sse-message-endpoint: /mcp/message
+        sse-message-endpoint: /connection-mcp/sse
+
+
+server:
+  port: 8081

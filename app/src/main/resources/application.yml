@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: multi-agent-training
+
+  ai:
+
+    # Limit utilization to do not go over quotas
+    retry:
+      max-attempts: 3
+      backoff:
+        nitial-interval: 3000
+
+    mcp:
+      client:
+        type: SYNC
+        request-timeout: 30s
+        sse:
+          transport-mode: WEBFLUX
+          connections:
+            account-mcp-server:
+              url: http://localhost:8081
+
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY}
+        chat:
+          options:
+            model: gemini-2.5-flash
