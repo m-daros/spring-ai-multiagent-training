@@ -2,7 +2,6 @@ package mdaros.langgraph4j.spring.ai.multiagent.training.agents;
 
 import io.modelcontextprotocol.client.McpSyncClient;
 import mdaros.langgraph4j.spring.ai.multiagent.training.graph.nodes.AgentNode;
-import mdaros.langgraph4j.spring.ai.multiagent.training.tools.ConnectionFinderTools;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.mcp.SyncMcpToolCallback;
 import org.springframework.ai.tool.ToolCallback;
@@ -30,7 +29,7 @@ public class ConnectionAgent extends AgentNode {
 
 
 	@Autowired
-	public ConnectionAgent ( ConnectionFinderTools connectionFinderTools, ChatClient chatClient ,List<McpSyncClient> mcpSyncClients ) {
+	public ConnectionAgent ( ChatClient chatClient ,List<McpSyncClient> mcpSyncClients ) {
 
 		this.agentName    = NAME;
 		this.systemPrompt = SYSTEM_PROMPTS;
