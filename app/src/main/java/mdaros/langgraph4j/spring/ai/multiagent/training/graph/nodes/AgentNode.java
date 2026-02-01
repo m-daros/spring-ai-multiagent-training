@@ -1,8 +1,6 @@
 package mdaros.langgraph4j.spring.ai.multiagent.training.graph.nodes;
 
-import lombok.AllArgsConstructor;
-import lombok.ToString;
-import lombok.Value;
+import lombok.*;
 import mdaros.langgraph4j.spring.ai.multiagent.training.model.State;
 import org.bsc.langgraph4j.action.NodeAction;
 import org.springframework.ai.chat.client.ChatClient;
@@ -11,15 +9,15 @@ import org.springframework.ai.tool.ToolCallback;
 import java.util.List;
 import java.util.Map;
 
-@Value
-@AllArgsConstructor
+@Getter
+@Setter
 @ToString
-public class AgentNode implements NodeAction<State> {
+public abstract class AgentNode implements NodeAction<State> {
 
-	String          	agentName;
-	String          	systemPrompt;
-	ToolCallback [] 	tools;
-	ChatClient      	chatClient;
+	protected String          	agentName;
+	protected String          	systemPrompt;
+	protected ToolCallback [] 	tools;
+	protected ChatClient      	chatClient;
 
 
 	@Override

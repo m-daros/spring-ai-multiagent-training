@@ -1,11 +1,13 @@
 package mdaros.langgraph4j.spring.ai.multiagent.training.tools;
 
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JobsAndOpportunityTools {
 
 	@Tool ( description = "Get all skills of a person" )

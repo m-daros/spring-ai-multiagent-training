@@ -20,6 +20,17 @@ spring:
             account-mcp-server:
               url: http://localhost:8081
 
+#    mcp:
+#      client:
+#        name: dvaas-mcp-client
+#        version: 0.0.1
+#        toolcallback:
+#          enabled: true
+#        streamable-http:
+#          connections:
+#            dvaas:
+#              url: http://localhost:8081
+
     google:
       genai:
         api-key: ${GEMINI_API_KEY}

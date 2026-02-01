@@ -12,6 +12,8 @@ public class AppConfig {
 	@Bean
 	public ToolCallbackProvider connectionTools ( CurriculaMcpService curriculaMcpService ) {
 
-		return MethodToolCallbackProvider.builder ().toolObjects ( curriculaMcpService ).build ();
+		return MethodToolCallbackProvider.builder ()
+			.toolObjects ( curriculaMcpService )
+			.build ();
 	}
 }

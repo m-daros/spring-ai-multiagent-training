@@ -1,11 +1,15 @@
 package mdaros.langgraph4j.spring.ai.multiagent.training.graph;
 
-import mdaros.langgraph4j.spring.ai.multiagent.training.AgentRegistry;
+import mdaros.langgraph4j.spring.ai.multiagent.training.agents.ConnectionAgent;
+import mdaros.langgraph4j.spring.ai.multiagent.training.agents.ConnectionFinderAgent;
+import mdaros.langgraph4j.spring.ai.multiagent.training.agents.OpportunityAgent;
+import mdaros.langgraph4j.spring.ai.multiagent.training.agents.UpskillAgent;
 import mdaros.langgraph4j.spring.ai.multiagent.training.graph.nodes.HumanApprovalNode;
 import mdaros.langgraph4j.spring.ai.multiagent.training.model.State;
 import org.bsc.langgraph4j.GraphStateException;
 import org.bsc.langgraph4j.StateGraph;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -19,34 +23,43 @@ import static org.bsc.langgraph4j.action.AsyncNodeAction.node_async;
 public class MultiAgentGraph {
 
 	@Autowired
-	private AgentRegistry agentRegistry;
+	//@Qualifier ( OpportunityAgent.NAME )
+	private OpportunityAgent opportunityAgent;
+
+	@Autowired
+	//@Qualifier ( UpskillAgent.NAME )
+	private UpskillAgent upskillAgent;
+
+	@Autowired
+	//@Qualifier ( ConnectionFinderAgent.NAME )
+	private ConnectionFinderAgent connectionFinderAgent;
+
+	@Autowired
+	//@Qualifier ( ConnectionAgent.NAME )
+	private ConnectionAgent connectionAgent;
+
 
 	public StateGraph<State> defineGraph () throws GraphStateException {
 
-		String opportunityAgent 	 = AgentRegistry.Agents.OPPORTUNITY_AGENT.name ();
-		String upskillAgent 		 = AgentRegistry.Agents.UPSKILL_AGENT.name ();
-		String connectionFinderAgent = AgentRegistry.Agents.CONNECTION_FINDER_AGENT.name ();
-		String connectionAgent 		 = AgentRegistry.Agents.CONNECTION_AGENT.name ();
-
 		var graph = new StateGraph<> ( State.SCHEMA, State :: new )
-			.addNode ( opportunityAgent, node_async ( agentRegistry.get ( opportunityAgent ) ) )
-			.addNode ( upskillAgent, node_async ( agentRegistry.get ( upskillAgent ) ) )
-			.addNode ( connectionFinderAgent, node_async ( agentRegistry.get ( connectionFinderAgent ) ) )
-			.addNode ( connectionAgent, node_async ( agentRegistry.get ( connectionAgent ) ) )
+			.addNode ( OpportunityAgent.NAME, node_async ( opportunityAgent ) )
+			.addNode ( UpskillAgent.NAME, node_async ( upskillAgent ) )
+			.addNode ( ConnectionFinderAgent.NAME, node_async ( connectionFinderAgent ) )
+			.addNode ( ConnectionAgent.NAME , node_async ( connectionAgent ) )
 			.addNode ( "HUMAN_APPROVER", node_async ( new HumanApprovalNode () ) );
 
-		graph.addEdge ( START, opportunityAgent );
-		graph.addEdge ( opportunityAgent, upskillAgent );
-		graph.addEdge ( upskillAgent, connectionFinderAgent );
-		graph.addEdge ( connectionFinderAgent, "HUMAN_APPROVER" );
+		graph.addEdge ( START, OpportunityAgent.NAME );
+		graph.addEdge ( OpportunityAgent.NAME, UpskillAgent.NAME );
+		graph.addEdge ( UpskillAgent.NAME, ConnectionFinderAgent.NAME );
+		graph.addEdge ( ConnectionFinderAgent.NAME, "HUMAN_APPROVER" );
 
 		graph.addConditionalEdges (
 			"HUMAN_APPROVER",
-			state -> CompletableFuture.completedFuture ( state.getCurrentMessage ().equals ( "REJECTED" ) ? connectionFinderAgent : connectionAgent ),
-			Map.of ( connectionFinderAgent, connectionFinderAgent, connectionAgent, connectionAgent )
+			state -> CompletableFuture.completedFuture ( state.getCurrentMessage ().equals ( "REJECTED" ) ? ConnectionFinderAgent.NAME : ConnectionAgent.NAME ),
+			Map.of ( ConnectionFinderAgent.NAME, ConnectionFinderAgent.NAME, ConnectionAgent.NAME, ConnectionAgent.NAME )
 		);
 
-		graph.addEdge ( connectionAgent, END );
+		graph.addEdge ( ConnectionFinderAgent.NAME, END );
 
 		return graph;
 	}
