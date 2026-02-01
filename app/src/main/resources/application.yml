@@ -6,9 +6,9 @@ spring:
 
     # Limit utilization to do not go over quotas
     retry:
-      max-attempts: 3
+      max-attempts: 2
       backoff:
-        nitial-interval: 3000
+        nitial-interval: 5000
 
     mcp:
       client:

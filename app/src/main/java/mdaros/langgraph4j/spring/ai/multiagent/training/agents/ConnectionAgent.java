@@ -6,15 +6,12 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.mcp.SyncMcpToolCallback;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static mdaros.langgraph4j.spring.ai.multiagent.training.agents.OpportunityAgent.NAME;
 
 @Component
-@Qualifier ( NAME )
 public class ConnectionAgent extends AgentNode {
 
 	public static final String NAME = "Connection Agent";

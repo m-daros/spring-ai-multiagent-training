@@ -5,13 +5,10 @@ import mdaros.langgraph4j.spring.ai.multiagent.training.tools.JobsAndOpportunity
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.support.ToolCallbacks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import static mdaros.langgraph4j.spring.ai.multiagent.training.agents.OpportunityAgent.NAME;
 
 @Component
-@Qualifier ( NAME )
 public class OpportunityAgent extends AgentNode {
 
 	public static final String NAME = "Opportunity Agent";
