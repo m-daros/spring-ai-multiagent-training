@@ -41,7 +41,7 @@ public abstract class AgentNode implements NodeAction<State> {
 		}
 
 		//Appending the current input
-		inputWithContext.append ( state.getPreviousAgentKey () )
+		inputWithContext.append ( state.getPreviousAgent () )
 			.append ( ": " )
 			.append ( input )
 			.append ( "\n" );

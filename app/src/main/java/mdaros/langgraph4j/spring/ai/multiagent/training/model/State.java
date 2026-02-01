@@ -30,7 +30,7 @@ public class State extends AgentState {
 		return this.<List<Map<String, String>>> value ( PREVIOUS_MESSAGES_KEY ).orElse ( new ArrayList<> () );
 	}
 
-	public String getPreviousAgentKey () {
+	public String getPreviousAgent () {
 
 		return this.<String> value ( PREVIOUS_AGENT_KEY ).orElse ( "NO AGENT" );
 	}
