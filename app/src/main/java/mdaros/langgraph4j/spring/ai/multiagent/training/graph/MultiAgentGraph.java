@@ -9,7 +9,6 @@ import mdaros.langgraph4j.spring.ai.multiagent.training.model.State;
 import org.bsc.langgraph4j.GraphStateException;
 import org.bsc.langgraph4j.StateGraph;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -23,19 +22,15 @@ import static org.bsc.langgraph4j.action.AsyncNodeAction.node_async;
 public class MultiAgentGraph {
 
 	@Autowired
-	//@Qualifier ( OpportunityAgent.NAME )
 	private OpportunityAgent opportunityAgent;
 
 	@Autowired
-	//@Qualifier ( UpskillAgent.NAME )
 	private UpskillAgent upskillAgent;
 
 	@Autowired
-	//@Qualifier ( ConnectionFinderAgent.NAME )
 	private ConnectionFinderAgent connectionFinderAgent;
 
 	@Autowired
-	//@Qualifier ( ConnectionAgent.NAME )
 	private ConnectionAgent connectionAgent;
 
 

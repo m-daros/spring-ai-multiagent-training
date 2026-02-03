@@ -1,5 +1,6 @@
 package mdaros.langgraph4j.spring.ai.curriculamcpserver.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Service;
 
@@ -7,11 +8,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CurriculaMcpService {
 
 	@Tool ( description = "Get background information about a contact by their ID" )
 	public String getContactBackground ( String personId ) throws IOException {
+
+		log.info ( "getContactBackground ( {} )", personId );
+
 		// Fake data simulation
 		return switch ( personId ) {
 			case "P001" ->
@@ -32,6 +37,9 @@ public class CurriculaMcpService {
 
 	@Tool ( description = "Get a contact’s professional interests by their ID" )
 	public List<String> getContactInterests ( String personId ) throws IOException {
+
+		log.info ( "getContactInterests ( {} )", personId );
+
 		// Fake data simulation
 		List<String> interests = new ArrayList<> ();
 		switch ( personId ) {
@@ -65,6 +73,8 @@ public class CurriculaMcpService {
 
 	@Tool ( description = "Simulate sending a connection request to a contact by ID" )
 	public String sendConnectionRequest ( String personId, String message ) throws IOException {
+
+		log.info ( "sendConnectionRequest ( {}, {} )", personId, message );
 
 		// Fake send action
 		return "✅ Connection request sent to " + personId + " with message:\n\n" + message;

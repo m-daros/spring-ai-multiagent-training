@@ -1,5 +1,6 @@
 package mdaros.langgraph4j.spring.ai.multiagent.training.tools;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Component;
 
@@ -7,11 +8,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class JobsAndOpportunityTools {
 
 	@Tool ( description = "Get all skills of a person" )
 	public List<String> getSkillsOfPerson ( String name ) throws IOException {
+
+		log.info ( "getSkillsOfPerson ( {} )", name );
 
 		List<String> skills = new ArrayList<> ();
 		skills.add ( "Java" );
@@ -26,6 +30,8 @@ public class JobsAndOpportunityTools {
 
 	@Tool ( description = "Find opportunities for given skills" )
 	public List<String> findOpportunitiesForSkills ( List<String> skills ) throws IOException {
+
+		log.info ( "findOpportunitiesForSkills ( {} )", skills );
 
 		List<String> opportunities = new ArrayList<> ();
 		opportunities.add ( "Backend Developer at XYZ Corp - Requires Java, Spring Boot, Docker" );

@@ -1,5 +1,6 @@
 package mdaros.langgraph4j.spring.ai.multiagent.training.tools;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Component;
 
@@ -7,11 +8,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class UpskillerTools {
 
 	@Tool ( description = "Get required skills for a specific opportunity" )
 	public List<String> getSkillsRequiredForOpportunity ( String opportunity ) throws IOException {
+
+		log.info ( "getSkillsRequiredForOpportunity ( {} )", opportunity );
 
 		// Fake data simulation (using IDs as keys)
 		List<String> requiredSkills = new ArrayList<> ();
@@ -25,6 +29,8 @@ public class UpskillerTools {
 
 	@Tool ( description = "Get skills of a person (for comparison with required skills)" )
 	public List<String> getSkillsOfPerson ( String name ) throws IOException {
+
+		log.info ( "getSkillsOfPerson ( {} )", name );
 
 		// Fake data simulation
 		List<String> skills = new ArrayList<> ();
