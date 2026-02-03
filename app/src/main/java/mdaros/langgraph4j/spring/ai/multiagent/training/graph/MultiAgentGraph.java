@@ -54,7 +54,7 @@ public class MultiAgentGraph {
 			Map.of ( ConnectionFinderAgent.NAME, ConnectionFinderAgent.NAME, ConnectionAgent.NAME, ConnectionAgent.NAME )
 		);
 
-		graph.addEdge ( ConnectionFinderAgent.NAME, END );
+		graph.addEdge ( ConnectionAgent.NAME, END );
 
 		return graph;
 	}
